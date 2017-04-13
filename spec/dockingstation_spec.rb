@@ -14,27 +14,31 @@ describe DockingStation do
       expect(bike).to be_working
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
-  end 
+  end
 
       it 'has a default capacity' do
     expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
   end
 end
 
-
-
- describe '#dock' do
+  describe '#dock' do
    it {is_expected.to respond_to(:dock).with(1).argument}
 
-   it "raises error when user trues to dock bike beyond capacity" do
-    DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
-    expect { subject.dock(Bike.new) }.to raise_error "Station Full"
-  end
+   #it "raises error when user tries to dock bike beyond capacity" do
+    #DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
+    #expect { subject.dock(Bike.new) }.to raise_error "Station Full"
 
 
-   it "docks a bike" do
-    bike = Bike.new
-    expect(subject.dock(bike)).to eq [bike]
+    it "docks a bike" do
+      bike = Bike.new
+      expect(subject.dock(bike)).to eq [bike]
+    end
+
+
+
+    it "raises and error when full" do
+      subject.capacity.times {subject.dock Bike.new }
+      expect { subject.dock(Bike.new) }.to raise_error "Station Full"
+    end
   end
- end
 end
