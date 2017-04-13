@@ -24,9 +24,9 @@ end
   describe '#dock' do
    it {is_expected.to respond_to(:dock).with(1).argument}
 
-   #it "raises error when user tries to dock bike beyond capacity" do
-    #DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
-    #expect { subject.dock(Bike.new) }.to raise_error "Station Full"
+    # it "raises error when user tries to dock bike beyond capacity" do
+    #  DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
+    #  expect { subject.dock(Bike.new) }.to raise_error "Station Full"
 
 
     it "docks a bike" do
@@ -39,6 +39,17 @@ end
     it "raises and error when full" do
       subject.capacity.times {subject.dock Bike.new }
       expect { subject.dock(Bike.new) }.to raise_error "Station Full"
+    end
+  end
+
+  describe 'initialization'do
+    subject { DockingStation.new }
+    let(:bike) { Bike.new }
+    it 'defaults capacity' do
+      described_class::DEFAULT_CAPACITY.times do
+        subject.dock(bike)
+      end
+      expect{ subject.dock(bike) }.to raise_error 'Docking station full'
     end
   end
 end
