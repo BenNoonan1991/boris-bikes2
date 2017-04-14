@@ -5,6 +5,7 @@ class DockingStation
   DEFAULT_CAPACITY = 20
 
   attr_reader :capacity
+  attr_accessor :broken_bikes
 
   def initialize(capacity = DEFAULT_CAPACITY)
     @broken_bikes = []
@@ -24,6 +25,7 @@ class DockingStation
   end
 
   def send_broken_bikes_to(delivery_vehicle)
+    delivery_vehicle.items_for_delivery = broken_bikes
   end
 
   def bikes
@@ -32,7 +34,7 @@ class DockingStation
 
   private
 
-  attr_accessor :broken_bikes, :working_bikes
+  attr_accessor :working_bikes
 
   def full?
     (broken_bikes + working_bikes).length  >= capacity
