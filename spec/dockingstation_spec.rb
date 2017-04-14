@@ -9,11 +9,14 @@ describe DockingStation do
   describe 'send_broken_bikes_to' do
     let(:docking_station_broken_bikes_pre_send) {subject.broken_bikes}
     let(:van) {Van.new}
+    let(:bike) {Bike.new}
     it "sends @brokens_bikes array to van.items_for_delivery" do
+      5.times { bike.report_broken; subject.dock(bike) }
+      #allow(delivery_vehicle).to receive(broken_bikes)
       subject.send_broken_bikes_to(van)
       expect(van.items_for_delivery).to eq docking_station_broken_bikes_pre_send
     end
-  end 
+  end
 
 
   describe '#release_bike' do
