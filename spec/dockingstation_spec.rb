@@ -4,6 +4,8 @@ require 'dockingstation'
 describe DockingStation do
   it { is_expected.to respond_to(:release_bike) }
 
+  it { is_expected.to respond_to(:send_broken_bikes) }
+
   describe '#release_bike' do
     let(:bike) { double :bike }
     it 'releases a bike' do
@@ -40,6 +42,7 @@ describe DockingStation do
   it 'has a default capacity' do
     expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
   end
+
 
   describe 'initializiation' do
     subject { DockingStation.new }
