@@ -22,6 +22,9 @@ class DockingStation
     bikes << bike
   end
 
+  def send_broken_bikes
+  end
+
   private
 
   attr_accessor :bikes
