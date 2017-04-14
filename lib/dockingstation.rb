@@ -26,6 +26,10 @@ class DockingStation
   def send_broken_bikes_to(delivery_vehicle)
   end
 
+  def bikes
+    working_bikes + broken_bikes
+  end
+
   private
 
   attr_accessor :broken_bikes, :working_bikes

@@ -25,12 +25,13 @@ describe DockingStation do
     it 'returns instance of Bike class' do
       allow(bike).to receive(:working?).and_return(true)
       subject.dock(bike)
-      expect(working_bikes + broken_bikes).to include(bike)
+      expect(subject.bikes).to include(bike)
     end
 
     it 'raises an error when full' do
-      subject.capacity.times { subject.dock double(:bike)}
-      expect { subject.dock double(:bike) }.to raise_error 'Docking station full'
+      allow(bike).to receive(:working?).and_return(true)
+      subject.capacity.times { subject.dock bike}
+      expect { subject.dock(bike) }.to raise_error 'Docking station full'
     end
 
     it '#bike returns docked bike' do
@@ -50,6 +51,7 @@ describe DockingStation do
     subject { DockingStation.new }
     let(:bike) { double(:bike) }
     it 'defaults capacity' do
+      allow(bike).to receive(:working?).and_return(true)
       described_class:: DEFAULT_CAPACITY.times do
         subject.dock(bike)
       end
