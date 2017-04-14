@@ -8,7 +8,7 @@ describe DockingStation do
 
     describe '#release_bike' do
       it 'releases a bike' do
-        bike = Bike.new
+        double(:bike)
         subject.dock(bike)
         expect(subject.release_bike).to eq bike
       end
@@ -20,13 +20,13 @@ describe DockingStation do
 
   describe '#dock' do
     it 'returns instance of Bike class' do
-      bike = Bike.new
+      double(:bike)
       expect(subject.dock(bike)).to eq [bike]
     end
 
     it 'raises an error when full' do
-      subject.capacity.times { subject.dock Bike.new}
-      expect { subject.dock Bike.new }.to raise_error 'Docking station full'
+      subject.capacity.times { subject.dock double(:bike)}
+      expect { subject.dock double(:bike) }.to raise_error 'Docking station full'
     end
 
 
@@ -36,7 +36,7 @@ describe DockingStation do
       # expect(bike).to be_working
       # subject.dock(bike)
       # expect(subject.release_bike).to eq bike
-        bike = Bike.new
+        double(:bike)
         subject.dock(bike)
         expect(subject.release_bike).to eq bike
         # Does not work with private method with array or .bikes
@@ -50,7 +50,7 @@ describe DockingStation do
 
   describe 'initializiation' do
     subject { DockingStation.new }
-    let(:bike) { Bike.new }
+    let(:bike) { double(:bike) }
     it 'defaults capacity' do
       described_class:: DEFAULT_CAPACITY.times do
         subject.dock(bike)
