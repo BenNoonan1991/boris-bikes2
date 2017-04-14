@@ -22,7 +22,7 @@ class DockingStation
     bikes << bike
   end
 
-  def send_broken_bikes
+  def send_broken_bikes_to
   end
 
   private
