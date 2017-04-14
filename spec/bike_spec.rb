@@ -8,12 +8,4 @@ describe Bike do
     expect(subject).to be_broken
   end
 
-  it 'No bikes available' do
-    #subject.broken
-    expect { subject.release_bike }.to raise_error 'No bikes available'
-  end
-  # Test failing, make sure to check
-
-
-
 end
