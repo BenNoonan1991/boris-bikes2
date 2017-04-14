@@ -23,7 +23,7 @@ describe DockingStation do
   describe '#dock' do
     let(:bike) { double :bike }
     it 'returns instance of Bike class' do
-      #expect(subject.dock(bike)).to eq [bike]
+      allow(bike).to receive(:working?).and_return(true)
       subject.dock(bike)
       expect(working_bikes + broken_bikes).to include(bike)
     end
