@@ -5,15 +5,9 @@ describe DockingStation do
   it { is_expected.to respond_to(:release_bike) }
 
   describe '#release_bike' do
+    let(:bike) { double :bike }
     it 'releases a bike' do
-      bike = Bike.new
-      subject.dock(bike)
-      expect(subject.release_bike).to eq bike
-    end
-
-  describe '#release_bike' do
-    it 'releases a bike' do
-      double(:bike)
+      allow(bike).to receive(:working?).and_return(true)
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end
@@ -25,8 +19,8 @@ describe DockingStation do
   end
 
   describe '#dock' do
+    let(:bike) { double :bike }
     it 'returns instance of Bike class' do
-      double(:bike)
       expect(subject.dock(bike)).to eq [bike]
     end
 
@@ -36,15 +30,9 @@ describe DockingStation do
     end
 
     it '#bike returns docked bike' do
-      # bike = Bike.new
-      # expect(bike).to be_working
-      # subject.dock(bike)
-      # expect(subject.release_bike).to eq bike
-        double(:bike)
-        subject.dock(bike)
-        expect(subject.release_bike).to eq bike
-        # Does not work with private method with array or .bikes
-
+      allow(bike).to receive(:working?).and_return(true)
+      subject.dock(bike)
+      expect(subject.release_bike).to eq bike
     end
 
   end
