@@ -6,6 +6,11 @@ describe DockingStation do
 
   it { is_expected.to respond_to(:send_broken_bikes_to).with(1).argument }
 
+  describe 'send_broken_bikes_to' do
+    #let(:bike) { double :bike }
+  end 
+
+
   describe '#release_bike' do
     let(:bike) { double :bike }
     it 'releases a bike' do
