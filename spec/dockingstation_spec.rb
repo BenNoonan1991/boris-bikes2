@@ -7,7 +7,12 @@ describe DockingStation do
   it { is_expected.to respond_to(:send_broken_bikes_to).with(1).argument }
 
   describe 'send_broken_bikes_to' do
-    #let(:bike) { double :bike }
+    let(:docking_station_broken_bikes_pre_send) {subject.broken_bikes}
+    let(:van) {Van.new}
+    it "sends @brokens_bikes array to van.items_for_delivery" do
+      subject.send_broken_bikes_to(van)
+      expect(van.items_for_delivery).to eq docking_station_broken_bikes_pre_send
+    end
   end 
 
 
