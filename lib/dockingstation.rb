@@ -7,7 +7,8 @@ class DockingStation
   attr_reader :capacity
 
   def initialize(capacity = DEFAULT_CAPACITY)
-    @bikes = []
+    @broken_bikes = []
+    @working_bikes = []
     @capacity = capacity
   end
 
@@ -19,7 +20,7 @@ class DockingStation
 
   def dock(bike)
     fail "Docking station full" if full?
-    bikes << bike
+    bike.working? ? working_bikes << bike : broken_bikes << bike
   end
 
   def send_broken_bikes_to(delivery_vehicle)
@@ -27,17 +28,13 @@ class DockingStation
 
   private
 
-  attr_accessor :bikes
+  attr_accessor :broken_bikes, :working_bikes
 
   def full?
-    bikes.length >= @capacity
+    (broken_bikes + working_bikes).length  >= capacity
   end
 
   def empty?
     working_bikes.empty?
-  end
-
-  def working_bikes
-    bikes.select{ |bike| bike.working? }
   end
 end
