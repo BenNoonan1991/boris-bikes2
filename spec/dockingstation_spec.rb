@@ -7,15 +7,15 @@ describe DockingStation do
   it { is_expected.to respond_to(:send_broken_bikes_to).with(1).argument }
 
   describe 'send_broken_bikes_to' do
-    let(:docking_station_broken_bikes_pre_send) {subject.broken_bikes}
     let(:van) {Van.new}
     let(:bike) {Bike.new}
+    let(:initially_docked_bikes) {Array.new}
     before(:example) do
-      5.times { bike.report_broken; subject.dock(bike) }
+      5.times { bike.report_broken; subject.dock(bike); initially_docked_bikes.push(bike) }
       subject.send_broken_bikes_to(van)
     end
     it "sends @brokens_bikes array to van.items_for_delivery" do
-      expect(van.items_for_delivery).to eq docking_station_broken_bikes_pre_send
+      expect(van.items_for_delivery).to eq initially_docked_bikes
     end
     it "removes bikes from @broken_bikes array after transfer to delivery vehicle" do
       expect(subject.broken_bikes).to be_empty

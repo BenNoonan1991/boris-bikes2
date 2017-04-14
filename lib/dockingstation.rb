@@ -26,6 +26,7 @@ class DockingStation
 
   def send_broken_bikes_to(delivery_vehicle)
     delivery_vehicle.items_for_delivery = broken_bikes
+    self.broken_bikes = []
   end
 
   def bikes
